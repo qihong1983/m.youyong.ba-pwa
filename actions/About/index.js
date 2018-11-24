@@ -40,7 +40,7 @@ const getTablesNoData = (data) => {
             payload: data.limit
         })
 
-        let res = await fetch("https://www.easy-mock.com/mock/5a2dca93e9ee5f7c09d8c6d7/Aaa/cname", {
+        let res = await fetch("https://api.youyong.ba/cname", {
             method: 'GET',
             // mode: 'cors',
             // cache: 'force-cache',
@@ -94,7 +94,7 @@ const getTables = (data) => {
             payload: data.limit
         })
 
-        let res = await fetch("https://www.easy-mock.com/mock/5a2dca93e9ee5f7c09d8c6d7/Aaa/cname", {
+        let res = await fetch("https://api.youyong.ba/cname", {
             method: 'GET',
             // mode: 'cors',
             // cache: 'force-cache',
