@@ -42,7 +42,7 @@ const getTablesNoData = (data) => {
 
         let res = await fetch("https://api.youyong.ba/cname", {
             method: 'GET',
-            // mode: 'cors',
+            mode: 'cors',
             // cache: 'force-cache',
             headers: {
                 'Cache-Control': 'no-cache',
@@ -96,7 +96,7 @@ const getTables = (data) => {
 
         let res = await fetch("https://api.youyong.ba/cname", {
             method: 'GET',
-            // mode: 'cors',
+            mode: 'cors',
             // cache: 'force-cache',
 
             headers: {
