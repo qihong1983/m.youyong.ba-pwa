@@ -40,7 +40,7 @@ const getTablesNoData = (data) => {
             payload: data.limit
         })
 
-        let res = await fetch("https://www.easy-mock.com/mock/5a2dca93e9ee5f7c09d8c6d7/Aaa/tableNoChange?p=" + data.offset, {
+        let res = await fetch("https://www.easy-mock.com/mock/5a2dca93e9ee5f7c09d8c6d7/Aaa/cname", {
             method: 'GET',
             // mode: 'cors',
             // cache: 'force-cache',
@@ -61,16 +61,16 @@ const getTablesNoData = (data) => {
             payload: json.data
         })
 
-        await dispatch({
-            type: "PAGE1_TOTAL",
-            payload: json.total
-        })
+        // await dispatch({
+        //     type: "PAGE1_TOTAL",
+        //     payload: json.total
+        // })
 
 
-        await dispatch({
-            type: "PAGE1_LOADING",
-            payload: false
-        })
+        // await dispatch({
+        //     type: "PAGE1_LOADING",
+        //     payload: false
+        // })
     }
 }
 
@@ -94,7 +94,7 @@ const getTables = (data) => {
             payload: data.limit
         })
 
-        let res = await fetch("https://www.easy-mock.com/mock/5a2dca93e9ee5f7c09d8c6d7/Aaa/nextDemoTables?p=" + data.offset, {
+        let res = await fetch("https://www.easy-mock.com/mock/5a2dca93e9ee5f7c09d8c6d7/Aaa/cname", {
             method: 'GET',
             // mode: 'cors',
             // cache: 'force-cache',
@@ -119,15 +119,6 @@ const getTables = (data) => {
             payload: json.data
         })
 
-        await dispatch({
-            type: "PAGE1_TOTAL",
-            payload: json.total
-        })
-
-        await dispatch({
-            type: "PAGE1_LOADING",
-            payload: false
-        })
     }
 }
 

@@ -16,7 +16,18 @@ import NProgress from 'nprogress';
 
 
 import * as actionCreators from '../actions/About/index';
-
+import {
+  Flex,
+  WhiteSpace,
+  Menu,
+  ActivityIndicator,
+  NavBar,
+  Drawer,
+  List,
+  NoticeBar,
+  SwipeAction,
+  Icon
+} from 'antd-mobile';
 
 import Head from '../components/head'
 import Nav from '../components/nav'
@@ -36,6 +47,7 @@ class Home extends Component {
     let data = store.getState();
 
     console.log(data.Home.limit, 'data11');
+
     let params = {
       limit: data.Home.limit,
       offset: 1
@@ -49,6 +61,11 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      open: false,
+      minHeight: '300px'
+    }
   }
 
   componentWillMount() {
@@ -62,89 +79,142 @@ class Home extends Component {
     }
   }
 
-  render() {
+  onOpenChange(e) {
 
-    console.log(this.props, '这里这里这里');
+    let isOpen = !this.state.open;
+
+    document.documentElement.clientHeight;
+
+    this.setState({
+      open: isOpen,
+      minHeight: document.documentElement.clientHeight
+    });
+  }
+
+
+  getListItem() {
+
+
+    return (
+
+      <List>
+        {
+
+          this.props.index.About.tableData.map((v, k) => {
+            return (<SwipeAction
+              style={{ backgroundColor: 'gray' }}
+              autoClose
+              right={[
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('cancel'),
+                  style: { backgroundColor: '#ddd', color: 'white' },
+                },
+                {
+                  text: 'Delete',
+                  onPress: () => console.log('delete'),
+                  style: { backgroundColor: '#F4333C', color: 'white' },
+                },
+              ]}
+              left={[
+                {
+                  text: 'Reply',
+                  onPress: () => console.log('reply'),
+                  style: { backgroundColor: '#108ee9', color: 'white' },
+                },
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('cancel'),
+                  style: { backgroundColor: '#ddd', color: 'white' },
+                },
+              ]}
+              onOpen={() => console.log('global open')}
+              onClose={() => console.log('global close')}
+            >
+              <List.Item
+                extra="More"
+                arrow="horizontal"
+                onClick={e => console.log(e)}
+              >
+                {v.cname}
+              </List.Item>
+            </SwipeAction>)
+          })
+        }
+
+      </List>
+
+    );
+  }
+
+
+  render() {
+    // const sidebar = (<List>
+    //   {[0, 1, 2, 3, 4, 5, 3, 14, 15].map((i, index) => {
+    //     if (index === 0) {
+    //       return (<List.Item key={index}
+    //         thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
+    //         multipleLine
+    //       >Category</List.Item>);
+    //     }
+    //     return (<List.Item key={index}
+    //       thumb="https://zos.alipayobjects.com/rmsportal/eOZidTabPoEbPeU.png"
+    //     >Category{index}</List.Item>);
+    //   })}
+    // </List>);
+
+    const sidebar = (<List>
+      <List.Item key={1}
+        thumb="https://m.youyong.ba/static/images/icons/icon-72x72.png"
+        multipleLine
+      ><Link href="/">
+          <a>主页</a>
+        </Link></List.Item>
+      <List.Item key={2}
+        thumb="https://m.youyong.ba/static/images/icons/icon-72x72.png"
+        multipleLine
+      ><Link href="/list">
+          <a>二级页</a>
+        </Link></List.Item>
+
+    </List>)
+
     return (
       <div>
         <Head title="Home" />
-        <Nav />
+        {/* <Nav /> */}
 
         <div className="hero">
-          <h1 className="title">Welcome to Next!{JSON.stringify(this.props.index.About.tableData)}</h1>
-          <p className="description">
-            To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
 
-          <div className="row">
-            <Link href="https://github.com/zeit/next.js#getting-started">
-              <a className="card">
-                <h3>Getting Started &rarr;</h3>
-                <p>Learn more about Next on Github and in their examples</p>
-              </a>
-            </Link>
-            <Link href="https://open.segment.com/create-next-app">
-              <a className="card">
-                <h3>Examples &rarr;</h3>
-                <p>
-                  Find other example boilerplates on the{' '}
-                  <code>create-next-app</code> site
-            </p>
-              </a>
-            </Link>
-            <Link href="https://github.com/segmentio/create-next-app">
-              <a className="card">
-                <h3>Create Next App &rarr;</h3>
-                <p>Was this tool helpful? Let us know how we can improve it</p>
-              </a>
-            </Link>
-          </div>
+          <NavBar icon={<Icon type="ellipsis" />} onLeftClick={this.onOpenChange.bind(this)}>主页</NavBar>
+
+
+          <Drawer
+            className="my-drawer"
+            style={{ minHeight: this.state.minHeight }}
+            enableDragHandle={false}
+            contentStyle={{ color: '#A6A6A6', textAlign: 'center' }}
+            sidebar={sidebar}
+            open={this.state.open}
+            onOpenChange={this.onOpenChange.bind(this)}
+          >
+            <NoticeBar marqueeProps={{ loop: true, style: { padding: '0 7.5px' } }}>
+              Notice: 完美前端脚手架(使前端开发不在复杂)--pwa + ssr + data fetching + react + redux + code splitting + antd + 多人并行开发方式 + SPA 。 简单、易用、实用性超过阿里（umi）、京东(taro)、百度(百度fis)。不服来战
+          </NoticeBar>
+
+            {this.getListItem()}
+
+
+          </Drawer>
+
         </div>
 
         <style jsx>{`
       .hero {
-        width: 100%;
-        color: #333;
+        color:red;
       }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
+      .am-navbar {
+        background-color: #e56045;
       }
     `}</style>
       </div>

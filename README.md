@@ -1,4 +1,4 @@
-# pwa + ssr + data fetching + react + redux + code splitting + antd + 多人并行开发方式 + SPA 完美前端脚手架。 简单、易用、实用性超过阿里（umi）、京东(taro)、百度(百度fis)。不服来战
+# 使前端开发业务不在那么难--pwa + ssr + data fetching + react + redux + code splitting + antd + 多人并行开发方式 + SPA 完美前端脚手架(使前端开发业务不在那么难)。 简单、易用、实用性超过阿里（umi）、京东(taro)、百度(百度fis)。不服来战
 
 This project was bootstrapped with [Create Next App](https://github.com/segmentio/create-next-app).
 
